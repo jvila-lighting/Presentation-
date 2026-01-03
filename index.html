@@ -44,27 +44,20 @@
             z-index: 1000;
             pointer-events: none;
         }
-    .fixed-footer-global {
+.footer-brand {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--deep-black);
-  color: var(--gold);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  padding: 20px clamp(20px, 4vw, 60px);
-  display: flex;
-  justify-content: space-between;
+  bottom: clamp(20px, 4vw, 40px);
+  right: clamp(20px, 4vw, 40px);
   z-index: 1000;
   pointer-events: none;
 }
 
-.footer-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+.footer-brand-content {
+  font-size: 11px;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
 }
         .slides-horizontal-wrapper {
             display: flex;
@@ -350,8 +343,10 @@
         </section>
 
     </div>
-<footer class="fixed-footer-global">
-    © 2026
+<footer class="footer-brand">
+  <div class="footer-brand-content">
+    <span>© 2026</span>
+  </div>
 </footer>
     <script>
         const wrapper = document.getElementById('wrapper');
