@@ -1,392 +1,384 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-	<title>be1.ru</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>J VILA | Brand Presentation</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #c5a059;
+            --deep-black: #0a0a0a;
+            --bg-white: #ffffff;
+            --text-main: #1a1a1a;
+            --muted-gray: #8e8e8e;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--deep-black);
+            font-family: 'Cinzel', serif;
+            -webkit-font-smoothing: antialiased;
+            touch-action: none;
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 40px clamp(20px, 4vw, 60px);
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-size: 11px;
+            color: var(--gold);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .slides-horizontal-wrapper {
+            display: flex;
+            height: 100vh;
+            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        section.slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 120px;
+            box-sizing: border-box;
+        }
+
+        .slide-1 {
+            flex-direction: row;
+            padding-top: 0;
+        }
+
+        .visual-panel-1 {
+            width: 50%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            min-width: 0;
+        }
+
+        .logo-img {
+            max-width: 70%;
+            max-height: 50%;
+            object-fit: contain;
+        }
+
+        .content-panel-1 {
+            width: 50%;
+            height: 100%;
+            background-color: var(--deep-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .intro-top-text {
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .wide-spacing { font-size: clamp(12px, 1.1vw, 14px); letter-spacing: 0.5em; display: block; margin-bottom: 6px; }
+        .narrow-spacing { font-size: clamp(9px, 0.75vw, 10.5px); letter-spacing: 0.1em; display: block; opacity: 0.6; }
+
+        .line-accent-compact {
+            color: var(--gold);
+            font-size: clamp(18px, 2vw, 24px);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.45em;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            padding-top: 20px;
+            display: inline-block;
+        }
+
+        .slide-factory-2 {
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 10% clamp(60px, 12vh, 140px);
+        }
+
+        .process-strip {
+            display: flex;
+            width: 100%;
+            height: 35vh;
+            gap: 20px;
+            margin-bottom: 50px;
+            max-width: 1100px;
+        }
+
+        .panel-item { flex: 1; height: 100%; overflow: hidden; background-color: #f8f8f8; }
+        .panel-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 1s; }
+        .panel-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+
+        .factory-bullets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(20px, 4vw, 40px) clamp(40px, 8vw, 80px);
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .bullet-item { display: flex; align-items: flex-start; }
+        .bullet-dot { width: 6px; height: 6px; background-color: var(--gold); margin-top: 10px; margin-right: 20px; flex-shrink: 0; }
+        .bullet-content p { font-family: 'Playfair Display', serif; font-size: 15px; line-height: 1.6; color: #1a1a1a; }
+
+        .slide-partners-3 {
+            background-color: var(--deep-black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 120px 10% clamp(60px, 12vh, 140px);
+        }
+
+        .partners-header {
+            color: var(--muted-gray);
+            font-size: 12px;
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .partners-grid-custom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px 100px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .partner-item {
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 25px;
+        }
+
+        .partner-item h3 {
+            color: var(--gold);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            margin-bottom: 15px;
+        }
+
+        .partner-item p {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            z-index: 1001;
+        }
+
+        .arrow-btn { background: none; border: none; cursor: pointer; padding: 10px; opacity: 0.4; transition: 0.3s; }
+        .arrow-btn:not(.disabled):hover { opacity: 1; }
+        .arrow-btn.disabled { opacity: 0; pointer-events: none; }
+        .arrow-svg { width: 35px; height: 15px; fill: none; stroke: var(--gold); stroke-width: 1.2; }
+        .counter { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .visual-panel-1 { display: none; }
+            .content-panel-1 { width: 100%; }
+            .partners-grid-custom, .factory-bullets { grid-template-columns: 1fr; gap: 30px; }
+            .process-strip { height: 28vh; }
+        }
+    </style>
 </head>
+
 <body>
-<p>&lt;!DOCTYPE html&gt;<br />
-&lt;html lang=&quot;ru&quot;&gt;<br />
-&lt;head&gt;<br />
-&nbsp; &nbsp; &lt;meta charset=&quot;UTF-8&quot;&gt;<br />
-&nbsp; &nbsp; &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;<br />
-&nbsp; &nbsp; &lt;title&gt;J VILA | Brand Presentation&lt;/title&gt;</p>
 
-<p>&nbsp; &nbsp; &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;</p>
+    <header class="fixed-header">
+        <div>J VILA</div>
+        <div>VALENCIA / EST. 1980</div>
+    </header>
 
-<p>&nbsp; &nbsp; &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Playfair+Display:wght@400;500&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</p>
+    <nav class="nav-controls">
+        <button class="arrow-btn disabled" id="prevBtn">
+            <svg class="arrow-svg" viewBox="0 0 30 14"><path d="M7 1L1 7L7 13M1 7H29" /></svg>
+        </button>
+        <div class="counter" id="counterDisplay">01 / 03</div>
+        <button class="arrow-btn" id="nextBtn">
+            <svg class="arrow-svg" viewBox="0 0 30 14" style="transform: rotate(180deg);"><path d="M7 1L1 7L7 13M1 7H29" /></svg>
+        </button>
+    </nav>
 
-<p>&nbsp; &nbsp; &lt;style&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; :root {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --gold: #c5a059;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --deep-black: #0a0a0a;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --bg-white: #ffffff;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --text-main: #1a1a1a;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; --muted-gray: #8e8e8e;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <div class="slides-horizontal-wrapper" id="wrapper">
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; html, body {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100vw;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100vh;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: var(--deep-black);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Cinzel&#39;, serif;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -webkit-font-smoothing: antialiased;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; touch-action: none;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <section class="slide slide-1">
+    <div class="visual-panel-1">
+        <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg"
+             alt="J VILA Logo"
+             class="logo-img">
+    </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .fixed-header {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: fixed;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; top: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 40px clamp(20px, 4vw, 60px);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: space-between;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; letter-spacing: 0.4em;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 11px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--gold);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 1000;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pointer-events: none;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    <div class="content-panel-1">
+        <div class="typography-anchor">
+            <div class="intro-top-text">
+                <span class="wide-spacing">Реализуя то,</span>
+                <span class="narrow-spacing">что другие считают</span>
+            </div>
+            <div class="line-accent-compact">невозможным</div>
+        </div>
+    </div>
+</section>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .slides-horizontal-wrapper {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100vh;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; will-change: transform;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <section class="slide slide-factory-2">
+            <div class="process-strip">
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?auto=format&fit=crop&q=80&w=800"></div>
+            </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; section.slide {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100vw;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100vh;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-shrink: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: relative;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; overflow: hidden;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: flex-start;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-top: 120px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; box-sizing: border-box;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+            <div class="factory-bullets">
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</p>
+                    </div>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .slide-1 {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: row;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-top: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</p>
+                    </div>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .visual-panel-1 {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 50%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: #ffffff;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 60px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-width: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</p>
+                    </div>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .logo-img {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 70%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-height: 50%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; object-fit: contain;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>Бережное сохранение традиций в сочетании с миром современных технологий.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .content-panel-1 {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 50%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: var(--deep-black);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min-width: 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <section class="slide slide-partners-3">
+            <div class="partners-header">Возможности сотрудничества</div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .intro-top-text {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #fff;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; line-height: 1.6;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 25px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+            <div class="partners-grid-custom">
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .wide-spacing { font-size: clamp(12px, 1.1vw, 14px); letter-spacing: 0.5em; display: block; margin-bottom: 6px; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .narrow-spacing { font-size: clamp(9px, 0.75vw, 10.5px); letter-spacing: 0.1em; display: block; opacity: 0.6; }</p>
+                <div class="partner-item">
+                    <h3>Дизайнеры интерьеров</h3>
+                    <p>Работа в широком диапазоне стилей — от классики до современного дизайна — с возможностью реализовать смелые идеи без привязки к стандартным формам и типовым решениям.</p>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .line-accent-compact {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--gold);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: clamp(18px, 2vw, 24px);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-weight: 500;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; letter-spacing: 0.45em;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-top: 1px solid rgba(197, 160, 89, 0.3);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-top: 20px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: inline-block;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+                <div class="partner-item">
+                    <h3>Архитекторы</h3>
+                    <p>Кастомизация изделий вплоть до крупномасштабных, архитектурно значимых объектов, где размеры, пропорции и конструкция проектируются под пространство.</p>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .slide-factory-2 {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: var(--bg-white);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--text-main);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 120px 10% clamp(60px, 12vh, 140px);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+                <div class="partner-item">
+                    <h3>Дизайн-бюро</h3>
+                    <p>Производство, позволяющее вести несколько проектов параллельно с единым уровнем качества, понятными сроками и контролем реализации.</p>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .process-strip {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 35vh;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 20px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 50px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 1100px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+                <div class="partner-item">
+                    <h3>HoReCa</h3>
+                    <p>Работа с большими объёмами — от центральных световых композиций до серийных изделий для номерного фонда и общественных зон.</p>
+                </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .panel-item { flex: 1; height: 100%; overflow: hidden; background-color: #f8f8f8; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .panel-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 1s; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .panel-item:hover img { filter: grayscale(0%); transform: scale(1.05); }</p>
+            </div>
+        </section>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .factory-bullets {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: grid;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; grid-template-columns: repeat(2, 1fr);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: clamp(20px, 4vw, 40px) clamp(40px, 8vw, 80px);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 1100px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+    </div>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .bullet-item { display: flex; align-items: flex-start; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .bullet-dot { width: 6px; height: 6px; background-color: var(--gold); margin-top: 10px; margin-right: 20px; flex-shrink: 0; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .bullet-content p { font-family: &#39;Playfair Display&#39;, serif; font-size: 15px; line-height: 1.6; color: #1a1a1a; }</p>
+    <script>
+        const wrapper = document.getElementById('wrapper');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const counterDisplay = document.getElementById('counterDisplay');
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .slide-partners-3 {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background-color: var(--deep-black);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding: 120px 10% clamp(60px, 12vh, 140px);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        let currentIdx = 0;
+        let totalSlides = slides.length;
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .partners-header {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--muted-gray);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 12px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; letter-spacing: 0.6em;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 80px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        wrapper.style.width = `${totalSlides * 100}vw`;
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .partners-grid-custom {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: grid;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; grid-template-columns: 1fr 1fr;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 60px 100px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; max-width: 1100px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width: 100%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        function updateUI() {
+            wrapper.style.transform = `translateX(-${currentIdx * 100}vw)`;
+            prevBtn.classList.toggle('disabled', currentIdx === 0);
+            nextBtn.classList.toggle('disabled', currentIdx === totalSlides - 1);
+            counterDisplay.innerText = `0${currentIdx + 1} / 0${totalSlides}`;
+        }
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .partner-item {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; border-bottom: 1px solid rgba(197, 160, 89, 0.2);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; padding-bottom: 25px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        function moveSlide(direction) {
+            const nextIdx = currentIdx + direction;
+            if (nextIdx >= 0 && nextIdx < totalSlides) {
+                currentIdx = nextIdx;
+                updateUI();
+            }
+        }
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .partner-item h3 {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: var(--gold);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 11px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-transform: uppercase;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; letter-spacing: 0.35em;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin-bottom: 15px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        nextBtn.onclick = () => moveSlide(1);
+        prevBtn.onclick = () => moveSlide(-1);
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .partner-item p {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: &#39;Playfair Display&#39;, serif;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-size: 14px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; line-height: 1.7;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: rgba(255, 255, 255, 0.7);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        let isThrottled = false;
+        window.addEventListener('wheel', e => {
+            if (isThrottled) return;
+            if (Math.abs(e.deltaY) > 30) {
+                isThrottled = true;
+                moveSlide(e.deltaY > 0 ? 1 : -1);
+                setTimeout(() => isThrottled = false, 1200);
+            }
+        }, { passive: true });
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .nav-controls {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; position: fixed;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bottom: 40px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left: 50%;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; transform: translateX(-50%);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gap: 60px;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; z-index: 1001;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        let touchX = 0;
+        window.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+        window.addEventListener('touchend', e => {
+            const deltaX = touchX - e.changedTouches[0].clientX;
+            if (Math.abs(deltaX) > 50) moveSlide(deltaX > 0 ? 1 : -1);
+        });
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .arrow-btn { background: none; border: none; cursor: pointer; padding: 10px; opacity: 0.4; transition: 0.3s; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .arrow-btn:not(.disabled):hover { opacity: 1; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .arrow-btn.disabled { opacity: 0; pointer-events: none; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .arrow-svg { width: 35px; height: 15px; fill: none; stroke: var(--gold); stroke-width: 1.2; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; .counter { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); }</p>
+        updateUI();
+    </script>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; @media (max-width: 768px) {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .visual-panel-1 { display: none; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .content-panel-1 { width: 100%; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .partners-grid-custom, .factory-bullets { grid-template-columns: 1fr; gap: 30px; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .process-strip { height: 28vh; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }<br />
-&nbsp; &nbsp; &lt;/style&gt;<br />
-&lt;/head&gt;</p>
-
-<p>&lt;body&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;header class=&quot;fixed-header&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;J VILA&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;VALENCIA / EST. 1980&lt;/div&gt;<br />
-&nbsp; &nbsp; &lt;/header&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;nav class=&quot;nav-controls&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;arrow-btn disabled&quot; id=&quot;prevBtn&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;svg class=&quot;arrow-svg&quot; viewBox=&quot;0 0 30 14&quot;&gt;&lt;path d=&quot;M7 1L1 7L7 13M1 7H29&quot; /&gt;&lt;/svg&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;/button&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;counter&quot; id=&quot;counterDisplay&quot;&gt;01 / 03&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=&quot;arrow-btn&quot; id=&quot;nextBtn&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;svg class=&quot;arrow-svg&quot; viewBox=&quot;0 0 30 14&quot; style=&quot;transform: rotate(180deg);&quot;&gt;&lt;path d=&quot;M7 1L1 7L7 13M1 7H29&quot; /&gt;&lt;/svg&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;/button&gt;<br />
-&nbsp; &nbsp; &lt;/nav&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;div class=&quot;slides-horizontal-wrapper&quot; id=&quot;wrapper&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;section class=&quot;slide slide-1&quot;&gt;<br />
-&nbsp; &nbsp; &lt;div class=&quot;visual-panel-1&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;img src=&quot;https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg&quot;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alt=&quot;J VILA Logo&quot;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;class=&quot;logo-img&quot;&gt;<br />
-&nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;div class=&quot;content-panel-1&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;typography-anchor&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;intro-top-text&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=&quot;wide-spacing&quot;&gt;Реализуя то,&lt;/span&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=&quot;narrow-spacing&quot;&gt;что другие считают&lt;/span&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;line-accent-compact&quot;&gt;невозможным&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &lt;/div&gt;<br />
-&lt;/section&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;section class=&quot;slide slide-factory-2&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;process-strip&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;panel-item&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&amp;fit=crop&amp;q=80&amp;w=800&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;panel-item&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&amp;fit=crop&amp;q=80&amp;w=800&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;panel-item&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1574359411659-15573a27f0c1?auto=format&amp;fit=crop&amp;q=80&amp;w=800&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;factory-bullets&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-dot&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-content&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-dot&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-content&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-dot&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-content&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-dot&quot;&gt;&lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;bullet-content&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Бережное сохранение традиций в сочетании с миром современных технологий.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;/section&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;section class=&quot;slide slide-partners-3&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;partners-header&quot;&gt;Возможности сотрудничества&lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;partners-grid-custom&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;partner-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3&gt;Дизайнеры интерьеров&lt;/h3&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Работа в широком диапазоне стилей &mdash; от классики до современного дизайна &mdash; с возможностью реализовать смелые идеи без привязки к стандартным формам и типовым решениям.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;partner-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3&gt;Архитекторы&lt;/h3&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Кастомизация изделий вплоть до крупномасштабных, архитектурно значимых объектов, где размеры, пропорции и конструкция проектируются под пространство.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;partner-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3&gt;Дизайн-бюро&lt;/h3&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Производство, позволяющее вести несколько проектов параллельно с единым уровнем качества, понятными сроками и контролем реализации.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=&quot;partner-item&quot;&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h3&gt;HoReCa&lt;/h3&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Работа с большими объёмами &mdash; от центральных световых композиций до серийных изделий для номерного фонда и общественных зон.&lt;/p&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;/section&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;script&gt;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; const wrapper = document.getElementById(&#39;wrapper&#39;);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; const slides = document.querySelectorAll(&#39;.slide&#39;);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; const prevBtn = document.getElementById(&#39;prevBtn&#39;);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; const nextBtn = document.getElementById(&#39;nextBtn&#39;);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; const counterDisplay = document.getElementById(&#39;counterDisplay&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; let currentIdx = 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; let totalSlides = slides.length;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; wrapper.style.width = `${totalSlides * 100}vw`;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function updateUI() {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wrapper.style.transform = `translateX(-${currentIdx * 100}vw)`;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; prevBtn.classList.toggle(&#39;disabled&#39;, currentIdx === 0);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nextBtn.classList.toggle(&#39;disabled&#39;, currentIdx === totalSlides - 1);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; counterDisplay.innerText = `0${currentIdx + 1} / 0${totalSlides}`;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function moveSlide(direction) {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const nextIdx = currentIdx + direction;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (nextIdx &gt;= 0 &amp;&amp; nextIdx &lt; totalSlides) {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; currentIdx = nextIdx;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; nextBtn.onclick = () =&gt; moveSlide(1);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; prevBtn.onclick = () =&gt; moveSlide(-1);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; let isThrottled = false;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener(&#39;wheel&#39;, e =&gt; {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isThrottled) return;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (Math.abs(e.deltaY) &gt; 30) {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; isThrottled = true;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; moveSlide(e.deltaY &gt; 0 ? 1 : -1);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(() =&gt; isThrottled = false, 1200);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
-&nbsp; &nbsp; &nbsp; &nbsp; }, { passive: true });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; let touchX = 0;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener(&#39;touchstart&#39;, e =&gt; touchX = e.touches[0].clientX);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener(&#39;touchend&#39;, e =&gt; {<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const deltaX = touchX - e.changedTouches[0].clientX;<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (Math.abs(deltaX) &gt; 50) moveSlide(deltaX &gt; 0 ? 1 : -1);<br />
-&nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; updateUI();<br />
-&nbsp; &nbsp; &lt;/script&gt;</p>
-
-<p>&lt;/body&gt;<br />
-&lt;/html&gt;</p>
 </body>
 </html>
