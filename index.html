@@ -10,271 +10,114 @@
         :root {
             --gold: #c5a059;
             --deep-black: #0a0a0a;
-            --bg-white: #ffffff;
-            --text-main: #1a1a1a;
+            --white-p: #f5f5f5;
+            --grey: #999999;
         }
         
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
+            margin: 0; padding: 0;
+            width: 100vw; height: 100vh;
             font-family: 'Cinzel', serif;
-            -webkit-font-smoothing: antialiased;
-            overflow: hidden;
             background-color: var(--deep-black);
-            touch-action: none;
+            overflow: hidden;
         }
 
-        /* ХЕДЕР */
+        /* HEADER / FOOTER */
         .fixed-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 40px 60px;
-            display: flex;
-            justify-content: space-between;
-            text-transform: uppercase;
-            letter-spacing: 0.4em;
-            font-size: 11px;
-            color: var(--gold);
-            z-index: 1000;
-            pointer-events: none;
+            position: fixed; top: 0; width: 100%;
+            padding: 40px 60px; display: flex; justify-content: space-between;
+            text-transform: uppercase; letter-spacing: 0.4em;
+            font-size: 11px; color: var(--gold); z-index: 1000;
         }
 
-        /* ФУТЕР */
         .fixed-footer-global {
-            position: fixed;
-            bottom: 40px;
-            right: 60px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 10px;
-            color: var(--gold);
-            z-index: 1000;
+            position: fixed; bottom: 40px; right: 60px;
+            text-transform: uppercase; letter-spacing: 0.3em;
+            font-size: 10px; color: var(--gold); z-index: 1000;
             opacity: 0.8;
-            pointer-events: none;
         }
 
-        /* КОНТЕЙНЕР СЛАЙДОВ */
         .slides-horizontal-wrapper {
-            display: flex;
-            width: 200vw; 
-            height: 100vh;
+            display: flex; width: 200vw; height: 100vh;
             transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
-            will-change: transform;
         }
 
-        section.slide {
-            width: 100vw;
-            height: 100vh;
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-        }
+        section.slide { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; position: relative; }
 
-        /* СЛАЙД 1: МАНИФЕСТ */
-        .visual-panel-1 {
-            width: 50%;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5%;
-        }
-
-        .logo-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0.98);
-            animation: fadeInLogo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeInLogo {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .logo-main {
-            /* Еще более компактный размер для создания ощущения эксклюзивности */
-            max-width: 35%;
-            max-height: 30%;
-            object-fit: contain;
-            transition: opacity 0.4s ease;
-        }
+        .visual-panel-1 { width: 50%; height: 100%; background-color: #ffffff; display: flex; align-items: center; justify-content: center; }
+        .logo-main { max-width: 22%; max-height: 40%; object-fit: contain; }
         
-        .logo-main:hover {
-            opacity: 0.8;
-        }
-
-        .content-panel-1 {
-            width: 50%;
-            background-color: var(--deep-black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .typography-anchor {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .intro-top-text {
-            color: #fff;
+        .content-panel-1 { width: 50%; height: 100%; background-color: var(--deep-black); display: flex; align-items: center; justify-content: center; }
+        
+        .typography-anchor { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        
+        .t-upper-wide { 
+            color: var(--white-p); 
+            font-size: 15px; 
+            letter-spacing: 0.3em; /* Уменьшен спейсинг для баланса с нижней строкой */
             text-transform: uppercase;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            opacity: 0.95;
-        }
-
-        .wide-spacing {
-            font-size: clamp(12px, 1.1vw, 14px);
-            letter-spacing: 0.5em; 
-            display: block;
             margin-bottom: 6px;
         }
-
-        .narrow-spacing {
-            font-size: clamp(9px, 0.75vw, 10.5px);
-            letter-spacing: 0.05em;
-            display: block;
-            opacity: 0.6;
-        }
-
-        .line-accent-compact {
-            color: var(--gold);
-            font-size: clamp(18px, 2vw, 24px);
-            font-weight: 500;
+        
+        .t-upper-tiny { 
+            color: var(--grey); 
+            font-size: 11px; 
+            letter-spacing: 0.15em; 
             text-transform: uppercase;
-            letter-spacing: 0.45em;
-            margin-right: -0.45em;
-            border-top: 1px solid rgba(197, 160, 89, 0.3);
-            padding-top: 20px;
-            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        /* Линия: 75% от слова, затухание в обе стороны */
+        .fade-line-gold {
+            width: 140px; /* 75% от визуальной ширины слова "НЕВОЗМОЖНЫМ" */
+            height: 1px;
+            background: linear-gradient(90deg, rgba(197, 160, 89, 0) 0%, var(--gold) 50%, rgba(197, 160, 89, 0) 100%);
+            margin: 0 auto 10px auto;
+        }
+        
+        .line-accent-gold {
+            color: var(--gold); 
+            font-size: 18px; 
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            display: block;
         }
 
-        /* СЛАЙД 2: ПРОИЗВОДСТВО */
-        .slide-factory-2 {
-            background-color: var(--bg-white);
-            color: var(--text-main);
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 100px 8% 120px;
-            overflow-y: auto;
+        /* СЛАЙД 2 */
+        .slide-factory-2 { 
+            background-color: #ffffff; flex-direction: column; align-items: center; 
+            padding: 120px 5% 120px; overflow-y: auto; 
         }
+        .process-strip { display: flex; width: 100%; max-width: 1200px; height: 38vh; gap: 15px; margin-bottom: 45px; }
+        .panel-item { flex: 1; overflow: hidden; background-color: #f8f8f8; }
+        .panel-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
 
-        .process-strip {
-            display: flex;
-            width: 100%;
-            height: 38vh;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-shrink: 0;
+        .factory-bullets { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px 100px; 
+            max-width: 1200px; width: 100%; 
         }
+        .bullet-item { display: flex; align-items: flex-start; }
+        .bullet-dot { width: 6px; height: 6px; background-color: var(--gold); margin: 10px 20px 0 0; flex-shrink: 0; }
+        .bullet-content p { font-family: 'Playfair Display', serif; font-size: 16px; color: #1a1a1a; line-height: 1.6; }
 
-        .panel-item {
-            flex: 1;
-            height: 100%;
-            overflow: hidden;
-            background-color: #f8f8f8;
-        }
-
-        .panel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .panel-item:hover img { filter: grayscale(0%); }
-
-        .factory-bullets {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px 60px;
-            max-width: 1000px;
-            width: 100%;
-            padding-bottom: 40px;
-        }
-
-        .bullet-item {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .bullet-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--gold);
-            margin-top: 10px;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-
-        .bullet-content p {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            line-height: 1.5;
-            color: #1a1a1a;
-            font-weight: 400;
-        }
-
-        /* УПРАВЛЕНИЕ НАВИГАЦИЕЙ */
         .nav-controls {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            z-index: 1001;
-            padding: 10px 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(197, 160, 89, 0.1);
-            border-radius: 50px;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 60px; z-index: 1001;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px);
+            border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 50px; padding: 10px 30px;
         }
-
-        .arrow-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            opacity: 0.4;
-            transition: 0.3s;
-        }
-        .arrow-btn:not(.disabled):hover { opacity: 1; }
-        .arrow-btn.disabled { opacity: 0; pointer-events: none; }
+        .arrow-btn { background: none; border: none; cursor: pointer; opacity: 0.4; transition: 0.3s; }
+        .arrow-btn:hover { opacity: 1; }
         .arrow-svg { width: 30px; height: 12px; fill: none; stroke: var(--gold); stroke-width: 1.5; }
         .counter { font-size: 10px; letter-spacing: 0.2em; color: var(--gold); }
 
         @media (max-width: 768px) {
-            .factory-bullets { grid-template-columns: 1fr; gap: 20px; }
-            .process-strip { 
-                display: grid; 
-                grid-template-columns: 1fr 1fr; 
-                height: auto; 
-                gap: 8px;
-                margin-bottom: 25px;
-            }
-            .panel-item { aspect-ratio: 1/1; }
-            .visual-panel-1 { display: none; }
-            .content-panel-1 { width: 100%; }
-            .nav-controls { bottom: 15px; }
-            .slide-factory-2 { padding-bottom: 80px; }
-            .logo-main { max-width: 60%; }
+            .nav-controls, .fixed-footer-global { display: none; }
+            .slides-horizontal-wrapper { flex-direction: column; width: 100vw; height: 200vh; transform: none !important; }
+            section.slide { height: 100vh; flex-direction: column; }
+            .visual-panel-1 { width: 100%; height: 40%; order: 1; }
+            .content-panel-1 { width: 100%; height: 60%; order: 2; }
+            .process-strip, .factory-bullets { display: none; }
         }
     </style>
 </head>
@@ -290,69 +133,39 @@
     </footer>
 
     <div class="nav-controls">
-        <button class="arrow-btn disabled" id="prevBtn" onclick="moveSlide(-1)">
-            <svg class="arrow-svg" viewBox="0 0 30 14"><path d="M7 1L1 7L7 13M1 7H29" /></svg>
-        </button>
+        <button class="arrow-btn" onclick="moveSlide(-1)"><svg class="arrow-svg" viewBox="0 0 30 14"><path d="M7 1L1 7L7 13M1 7H29" /></svg></button>
         <div class="counter" id="counterDisplay">01 / 02</div>
-        <button class="arrow-btn" id="nextBtn" onclick="moveSlide(1)">
-            <svg class="arrow-svg" viewBox="0 0 30 14" style="transform: rotate(180deg);"><path d="M7 1L1 7L7 13M1 7H29" /></svg>
-        </button>
+        <button class="arrow-btn" onclick="moveSlide(1)"><svg class="arrow-svg" viewBox="0 0 30 14" style="transform: rotate(180deg);"><path d="M7 1L1 7L7 13M1 7H29" /></svg></button>
     </div>
 
     <div class="slides-horizontal-wrapper" id="wrapper">
         
-        <!-- СЛАЙД 1: МАНИФЕСТ -->
         <section class="slide">
             <div class="visual-panel-1">
-                <div class="logo-container">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1TUtJP2lwTmzFsrHL-xzOHnRYIO9qN5Qg" alt="[Логотип J VILA]" class="logo-main" onerror="this.src='https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800'">
-                </div>
+                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-main">
             </div>
             <div class="content-panel-1">
                 <div class="typography-anchor">
-                    <div class="intro-top-text">
-                        <span class="wide-spacing">Реализуя то,</span>
-                        <span class="narrow-spacing">что другие считают</span>
-                    </div>
-                    <div class="line-accent-compact">невозможным</div>
+                    <span class="t-upper-wide">РЕАЛИЗУЯ ТО,</span>
+                    <span class="t-upper-tiny">ЧТО ДРУГИЕ СЧИТАЮТ</span>
+                    <div class="fade-line-gold"></div>
+                    <div class="line-accent-gold">НЕВОЗМОЖНЫМ</div>
                 </div>
             </div>
         </section>
 
-        <!-- СЛАЙД 2: ПРОИЗВОДСТВО -->
         <section class="slide slide-factory-2">
             <div class="process-strip">
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="[Производство освещения]"></div>
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800" alt="[Хрусталь люстры]"></div>
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?auto=format&fit=crop&q=80&w=800" alt="[Детали светильника]"></div>
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?auto=format&fit=crop&q=80&w=800" alt="[Интерьерное освещение]"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800"></div>
             </div>
-            
             <div class="factory-bullets">
-                <div class="bullet-item">
-                    <div class="bullet-dot"></div>
-                    <div class="bullet-content">
-                        <p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</p>
-                    </div>
-                </div>
-                <div class="bullet-item">
-                    <div class="bullet-dot"></div>
-                    <div class="bullet-content">
-                        <p>45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</p>
-                    </div>
-                </div>
-                <div class="bullet-item">
-                    <div class="bullet-dot"></div>
-                    <div class="bullet-content">
-                        <p>Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</p>
-                    </div>
-                </div>
-                <div class="bullet-item">
-                    <div class="bullet-dot"></div>
-                    <div class="bullet-content">
-                        <p>Бережное сохранение традиционных техник мастерства в сочетании с миром современных технологий.</p>
-                    </div>
-                </div>
+                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества каждой детали.</p></div></div>
+                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>45-летний профессиональный опыт позволяет реализовывать уникальные проекты любой технической сложности.</p></div></div>
+                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>Использование компонентов премиум-класса: хрусталя Asfour и стекла Schott.</p></div></div>
+                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>Сохранение традиций в сочетании с миром современных технологий.</p></div></div>
             </div>
         </section>
 
@@ -360,47 +173,19 @@
 
     <script>
         let currentIdx = 0;
-        const totalSlides = 2;
+        const total = 2;
         const wrapper = document.getElementById('wrapper');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const counterDisplay = document.getElementById('counterDisplay');
+        const counter = document.getElementById('counterDisplay');
 
-        function moveSlide(direction) {
-            const nextIdx = currentIdx + direction;
-            if (nextIdx >= 0 && nextIdx < totalSlides) {
-                currentIdx = nextIdx;
-                updateUI();
-            }
-        }
-
-        function updateUI() {
+        function moveSlide(dir) {
+            currentIdx = Math.max(0, Math.min(currentIdx + dir, total - 1));
             wrapper.style.transform = `translateX(-${currentIdx * 100}vw)`;
-            prevBtn.classList.toggle('disabled', currentIdx === 0);
-            nextBtn.classList.toggle('disabled', currentIdx === totalSlides - 1);
-            counterDisplay.innerText = `0${currentIdx + 1} / 0${totalSlides}`;
+            if(counter) counter.innerText = `0${currentIdx + 1} / 0${total}`;
         }
 
-        let isThrottled = false;
         window.addEventListener('wheel', e => {
-            if (isThrottled) return;
-            if (Math.abs(e.deltaY) > 30) {
-                isThrottled = true;
-                moveSlide(e.deltaY > 0 ? 1 : -1);
-                setTimeout(() => isThrottled = false, 1200);
-            }
+            if (Math.abs(e.deltaY) > 30) moveSlide(e.deltaY > 0 ? 1 : -1);
         }, {passive: true});
-
-        let touchX = 0;
-        window.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
-        window.addEventListener('touchend', e => {
-            const deltaX = touchX - e.changedTouches[0].clientX;
-            if (Math.abs(deltaX) > 50) moveSlide(deltaX > 0 ? 1 : -1);
-        });
     </script>
 </body>
 </html>
-
-
-
-
