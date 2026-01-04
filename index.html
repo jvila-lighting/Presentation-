@@ -22,6 +22,12 @@
             overflow: hidden;
         }
 
+        /* Класс для латиницы: 500 для изящности */
+        .font-latin-bold {
+            font-weight: 500;
+            letter-spacing: 0.4em;
+        }
+
         /* HEADER / FOOTER */
         .fixed-header {
             position: fixed; top: 0; width: 100%;
@@ -38,50 +44,21 @@
         }
 
         .slides-horizontal-wrapper {
-            display: flex; width: 200vw; height: 100vh;
+            display: flex; width: 300vw; height: 100vh;
             transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
         section.slide { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; position: relative; }
 
+        /* СЛАЙД 1 */
         .visual-panel-1 { width: 50%; height: 100%; background-color: #ffffff; display: flex; align-items: center; justify-content: center; }
         .logo-main { max-width: 22%; max-height: 40%; object-fit: contain; }
-        
         .content-panel-1 { width: 50%; height: 100%; background-color: var(--deep-black); display: flex; align-items: center; justify-content: center; }
-        
         .typography-anchor { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        
-        .t-upper-wide { 
-            color: var(--white-p); 
-            font-size: 15px; 
-            letter-spacing: 0.3em; /* Уменьшен спейсинг для баланса с нижней строкой */
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-        
-        .t-upper-tiny { 
-            color: var(--grey); 
-            font-size: 11px; 
-            letter-spacing: 0.15em; 
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        
-        /* Линия: 75% от слова, затухание в обе стороны */
-        .fade-line-gold {
-            width: 140px; /* 75% от визуальной ширины слова "НЕВОЗМОЖНЫМ" */
-            height: 1px;
-            background: linear-gradient(90deg, rgba(197, 160, 89, 0) 0%, var(--gold) 50%, rgba(197, 160, 89, 0) 100%);
-            margin: 0 auto 10px auto;
-        }
-        
-        .line-accent-gold {
-            color: var(--gold); 
-            font-size: 18px; 
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            display: block;
-        }
+        .t-upper-wide { color: var(--white-p); font-size: 15px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 6px; }
+        .t-upper-tiny { color: var(--grey); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+        .fade-line-gold { width: 140px; height: 1px; background: linear-gradient(90deg, rgba(197, 160, 89, 0) 0%, var(--gold) 50%, rgba(197, 160, 89, 0) 100%); margin: 0 auto 10px auto; }
+        .line-accent-gold { color: var(--gold); font-size: 18px; letter-spacing: 0.4em; text-transform: uppercase; display: block; }
 
         /* СЛАЙД 2 */
         .slide-factory-2 { 
@@ -91,14 +68,59 @@
         .process-strip { display: flex; width: 100%; max-width: 1200px; height: 38vh; gap: 15px; margin-bottom: 45px; }
         .panel-item { flex: 1; overflow: hidden; background-color: #f8f8f8; }
         .panel-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
-
-        .factory-bullets { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px 100px; 
-            max-width: 1200px; width: 100%; 
-        }
+        .factory-bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 100px; max-width: 1200px; width: 100%; }
+        
         .bullet-item { display: flex; align-items: flex-start; }
-        .bullet-dot { width: 6px; height: 6px; background-color: var(--gold); margin: 10px 20px 0 0; flex-shrink: 0; }
-        .bullet-content p { font-family: 'Playfair Display', serif; font-size: 16px; color: #1a1a1a; line-height: 1.6; }
+        .bullet-dot { 
+            width: 5px; height: 5px; 
+            background-color: var(--gold); 
+            margin-top: 11px; 
+            margin-right: 20px; 
+            flex-shrink: 0; 
+        }
+        .bullet-content p { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 16px; 
+            color: #1a1a1a; 
+            line-height: 1.7; 
+        }
+
+        /* СЛАЙД 3 */
+        .slide-partnership-3 { 
+            background-color: var(--deep-black); flex-direction: column; align-items: center; 
+            padding: 120px 5% 120px; overflow-y: auto; 
+        }
+        .slide-partnership-title {
+            width: 100%; height: 38vh; margin-bottom: 45px;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .slide-partnership-title h2 {
+            color: var(--grey); font-size: 10px; letter-spacing: 0.6em; text-transform: uppercase; opacity: 0.6;
+        }
+
+        /* Выравнивание точки по высоте подзаголовка */
+        .slide-partnership-3 .bullet-dot {
+            margin-top: 6px; /* Подняли точку к заголовку "Дизайнеры..." */
+        }
+
+        .bullet-content .bullet-category {
+            color: var(--gold);
+            font-size: 13px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+            font-family: 'Cinzel', serif;
+            line-height: 1.2;
+        }
+
+        .slide-partnership-3 .bullet-content p { 
+            color: var(--white-p); 
+            opacity: 0.8; 
+            line-height: 1.7;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+        }
 
         .nav-controls {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -113,19 +135,19 @@
 
         @media (max-width: 768px) {
             .nav-controls, .fixed-footer-global { display: none; }
-            .slides-horizontal-wrapper { flex-direction: column; width: 100vw; height: 200vh; transform: none !important; }
+            .slides-horizontal-wrapper { flex-direction: column; width: 100vw; height: auto; transform: none !important; }
             section.slide { height: 100vh; flex-direction: column; }
             .visual-panel-1 { width: 100%; height: 40%; order: 1; }
             .content-panel-1 { width: 100%; height: 60%; order: 2; }
-            .process-strip, .factory-bullets { display: none; }
+            .process-strip, .factory-bullets, .slide-partnership-title { display: none; }
         }
     </style>
 </head>
 <body>
 
     <header class="fixed-header">
-        <div>J VILA</div>
-        <div>VALENCIA / EST. 1980</div>
+        <div class="font-latin-bold">J VILA</div>
+        <div class="font-latin-bold">VALENCIA / EST. 1980</div>
     </header>
 
     <footer class="fixed-footer-global">
@@ -134,7 +156,7 @@
 
     <div class="nav-controls">
         <button class="arrow-btn" onclick="moveSlide(-1)"><svg class="arrow-svg" viewBox="0 0 30 14"><path d="M7 1L1 7L7 13M1 7H29" /></svg></button>
-        <div class="counter" id="counterDisplay">01 / 02</div>
+        <div class="counter font-latin-bold" id="counterDisplay">01 / 03</div>
         <button class="arrow-btn" onclick="moveSlide(1)"><svg class="arrow-svg" viewBox="0 0 30 14" style="transform: rotate(180deg);"><path d="M7 1L1 7L7 13M1 7H29" /></svg></button>
     </div>
 
@@ -149,7 +171,7 @@
                     <span class="t-upper-wide">РЕАЛИЗУЯ ТО,</span>
                     <span class="t-upper-tiny">ЧТО ДРУГИЕ СЧИТАЮТ</span>
                     <div class="fade-line-gold"></div>
-                    <div class="line-accent-gold">НЕВОЗМОЖНЫМ</div>
+                    <span class="line-accent-gold">НЕВОЗМОЖНЫМ</span>
                 </div>
             </div>
         </section>
@@ -162,10 +184,58 @@
                 <div class="panel-item"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800"></div>
             </div>
             <div class="factory-bullets">
-                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества каждой детали.</p></div></div>
-                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>45-летний профессиональный опыт позволяет реализовывать уникальные проекты любой технической сложности.</p></div></div>
-                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>Использование компонентов премиум-класса: хрусталя Asfour и стекла Schott.</p></div></div>
-                <div class="bullet-item"><div class="bullet-dot"></div><div class="bullet-content"><p>Сохранение традиций в сочетании с миром современных технологий.</p></div></div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content"><p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества каждой детали.</p></div>
+                </div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content"><p>45-летний профессиональный опыт позволяет реализовывать уникальные проекты любой технической сложности.</p></div>
+                </div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content"><p>Использование компонентов премиум-класса: хрусталя Asfour и стекла Schott.</p></div>
+                </div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content"><p>Сохранение традиций в сочетании с миром современных технологий.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide slide-partnership-3">
+            <div class="slide-partnership-title">
+                <h2>Возможности сотрудничества</h2>
+            </div>
+            <div class="factory-bullets">
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <span class="bullet-category">Дизайнеры интерьеров</span>
+                        <p>Работа в широком диапазоне стилей — от классики до современного дизайна — с возможностью реализовать смелые идеи без привязки к стандартным формам и типовым решениям.</p>
+                    </div>
+                </div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <span class="bullet-category">Архитекторы</span>
+                        <p>Кастомизация изделий вплоть до крупномасштабных, архитектурно значимых объектов, где размеры, пропорции и конструкция проектируются под пространство.</p>
+                    </div>
+                </div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <span class="bullet-category">Дизайн-бюро и студии</span>
+                        <p>Производство, позволяющее вести несколько проектов параллельно с единым уровнем качества и контролем реализации.</p>
+                    </div>
+                </div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <span class="bullet-category font-latin-bold">HoReCa</span>
+                        <p>Работа с большими объёмами — от центральных световых композиций до серийных изделий для номерного фонда и общественных зон.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -173,7 +243,7 @@
 
     <script>
         let currentIdx = 0;
-        const total = 2;
+        const total = 3;
         const wrapper = document.getElementById('wrapper');
         const counter = document.getElementById('counterDisplay');
 
@@ -189,3 +259,4 @@
     </script>
 </body>
 </html>
+
