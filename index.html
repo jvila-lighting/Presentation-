@@ -17,7 +17,6 @@
             color: white;
         }
 
-        /* ОБЩИЕ ЭЛЕМЕНТЫ */
         .fixed-header {
             position: fixed; top: 0; width: 100%;
             padding: 30px 50px;
@@ -26,29 +25,24 @@
             font-size: 10px; color: var(--gold); z-index: 2000;
         }
 
-        /* --- ДЛЯ ПЛАНШЕТОВ И ПК (ОТ 769px) --- */
+        /* --- ДЕСКТОП И ПЛАНШЕТЫ (ГОРИЗОНТАЛЬНО) --- */
         @media (min-width: 769px) {
             body, html { overflow: hidden; height: 100%; }
             .viewport { width: 100vw; height: 100vh; overflow: hidden; position: relative; }
-            .slides-wrapper { 
-                display: flex; width: 300vw; height: 100vh; 
-                transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1); 
-            }
+            .slides-wrapper { display: flex; width: 300vw; height: 100vh; transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1); }
             .slide { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; }
             
-            /* Слайд 1 на планшетах (красивое деление пополам) */
             .slide-1 .visual-panel-1 { width: 50%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; }
             .slide-1 .content-panel-1 { width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
             
-            .nav-controls {
-                position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%);
-                display: flex; align-items: center; gap: 60px; z-index: 2000;
-            }
+            .logo-mobile { display: none; }
+            .logo-desktop { display: block; height: 110px; width: auto; }
+
+            .nav-controls { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 60px; z-index: 2000; }
             .footer-brand { position: fixed; bottom: 45px; right: 60px; color: var(--gold); font-size: 10px; opacity: 0.6; }
         }
 
-        /* КОНТЕНТ СЛАЙДОВ (ОБЩИЙ) */
-        .logo-img { height: 110px; width: auto; }
+        /* ОБЩИЕ СТИЛИ КОНТЕНТА */
         .line-accent { 
             color: var(--gold); font-size: 20px; letter-spacing: 0.38em; text-transform: uppercase; 
             border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 18px; margin-top: 20px; 
@@ -67,32 +61,34 @@
         .partners-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 80px; width: 100%; max-width: 1000px; }
         .partner-item { border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 20px; }
         .partner-item h3 { color: var(--gold); font-size: 11px; letter-spacing: 0.25em; margin-bottom: 12px; text-transform: uppercase; font-weight: 400; }
-        .partner-item h3.latin-weight { font-weight: 600; }
-        .partner-item p { font-family: 'Playfair Display'; font-size: 13px; line-height: 1.7; opacity: 0.9; letter-spacing: 0.03em; }
+        .partner-item p { font-family: 'Playfair Display'; font-size: 13px; line-height: 1.7; opacity: 0.9; }
 
         .arrow-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 24px; padding: 10px; }
         .counter { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; }
 
-        /* --- ТОЛЬКО ДЛЯ МОБИЛЬНЫХ (ДО 768px) --- */
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ (ВЕРТИКАЛЬНО) --- */
         @media (max-width: 768px) {
             body { overflow-y: auto; overflow-x: hidden; }
             .viewport { height: auto; }
             .slides-wrapper { flex-direction: column; width: 100vw; height: auto; transform: none !important; }
             .slide { width: 100vw; height: auto; min-height: 100vh; display: flex; flex-direction: column; }
             
-            /* Пропорции первого слайда на моб: черный блок больше */
-            .slide-1 { padding: 0 !important; }
-            .slide-1 .visual-panel-1 { width: 100%; height: 42vh; background: white; display: flex; align-items: center; justify-content: center; padding-top: 30px; }
-            .slide-1 .content-panel-1 { width: 100%; height: 58vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; }
+            /* Полностью черный первый слайд */
+            .slide-1 { background: var(--black); padding: 120px 20px 60px !important; justify-content: center; }
+            .slide-1 .visual-panel-1 { width: 100%; height: auto; background: transparent; margin-bottom: 40px; }
             
-            .logo-img { height: 75px; }
+            .logo-desktop { display: none; }
+            .logo-mobile { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; }
+
+            .slide-1 .content-panel-1 { width: 100%; height: auto; text-align: center; }
+            
             .slide-factory-2, .slide-partners-3 { padding: 100px 20px 60px !important; }
             .process-strip { flex-direction: column; height: auto; width: 100%; gap: 10px; }
             .panel-item { height: 180px; }
             .factory-grid, .partners-grid { grid-template-columns: 1fr; width: 100%; gap: 30px; }
             
             .nav-controls, .footer-brand { display: none; }
-            .fixed-header { padding: 20px; background: rgba(10,10,10,0.8); }
+            .fixed-header { padding: 20px; background: rgba(10,10,10,0.9); }
         }
     </style>
 </head>
@@ -107,7 +103,9 @@
     <div class="slides-wrapper" id="mainWrapper">
         <section class="slide slide-1">
             <div class="visual-panel-1">
-                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-img">
+                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-desktop">
+                
+                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/refs/heads/main/1767502199285.jpg" class="logo-mobile">
             </div>
             <div class="content-panel-1">
                 <span style="font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase;">Реализуя то,</span>
@@ -123,7 +121,7 @@
                 <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?w=800"></div>
             </div>
             <div class="factory-grid">
-                <div class="bullet-item">Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного качества.</div>
+                <div class="bullet-item">Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</div>
                 <div class="bullet-item">45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</div>
                 <div class="bullet-item">Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</div>
                 <div class="bullet-item">Бережное сохранение традиций в сочетании с миром современных технологий.</div>
@@ -179,7 +177,6 @@
         if (e.key === 'ArrowLeft') changeSlide(-1);
     });
 
-    // Обработка смены размера экрана (для корректного сброса положений)
     window.addEventListener('resize', () => {
         if (window.innerWidth <= 768) {
             wrapper.style.transform = 'none';
