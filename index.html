@@ -2,230 +2,405 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>J VILA Presentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>J VILA | Brand Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
-    
     <style>
-        :root { --gold: #c5a059; --black: #0a0a0a; }
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        :root {
+            --gold: #c5a059;
+            --deep-black: #0a0a0a;
+            --bg-white: #ffffff;
+            --text-main: #1a1a1a;
+        }
         
         body, html {
-            margin: 0; padding: 0;
-            background-color: var(--black);
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
             font-family: 'Cinzel', serif;
-            color: white;
-            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            background-color: var(--deep-black);
+            touch-action: none;
         }
 
-        /* ТОЧКИ (МОБИЛЬНЫЕ) */
-        .side-dots {
-            position: fixed; right: 20px; top: 50%;
-            transform: translateY(-50%); display: none;
-            flex-direction: column; gap: 20px; z-index: 3000;
-        }
-        .dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: transparent; border: 1.5px solid var(--gold);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; opacity: 0.4;
-        }
-        .dot.active { background: var(--gold); transform: scale(1.6); opacity: 1; box-shadow: 0 0 10px rgba(197, 160, 89, 0.4); }
-
+        /* ХЕДЕР */
         .fixed-header {
-            position: fixed; top: 0; width: 100%;
-            padding: 30px 50px; display: flex; justify-content: space-between;
-            text-transform: uppercase; letter-spacing: 0.3em;
-            font-size: 10px; color: var(--gold); z-index: 2000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-size: 11px;
+            color: var(--gold);
+            z-index: 1000;
+            pointer-events: none;
         }
 
-        /* ДЕСКТОП И ПЛАНШЕТЫ */
-        @media (min-width: 769px) {
-            body, html { overflow: hidden; height: 100%; }
-            .viewport { width: 100vw; height: 100vh; overflow: hidden; position: relative; }
-            .slides-wrapper { display: flex; width: 300vw; height: 100vh; transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1); }
-            .slide { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; }
-            
-            .slide-1 .visual-panel-1 { width: 50%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; }
-            .slide-1 .content-panel-1 { width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
-            
-            .logo-mobile { display: none; }
-            .logo-desktop { display: block; height: 110px; width: auto; }
-
-            /* Десктопная сетка (полный текст) */
-            .desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 60px; width: 85%; max-width: 1100px; margin: 0 auto; }
-            .bullet-item { display: flex; gap: 15px; font-family: 'Playfair Display'; font-size: 14px; line-height: 1.6; text-align: left; }
-            .bullet-item::before { content: ""; width: 6px; height: 6px; background: var(--gold); margin-top: 8px; flex-shrink: 0; }
-            
-            .accordion-container { display: none; }
-            .nav-controls { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 60px; z-index: 2000; }
-            .footer-brand { position: fixed; bottom: 45px; right: 60px; color: var(--gold); font-size: 10px; opacity: 0.6; }
+        /* ФУТЕР */
+        .fixed-footer-global {
+            position: fixed;
+            bottom: 40px;
+            right: 60px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-size: 10px;
+            color: var(--gold);
+            z-index: 1000;
+            opacity: 0.8;
+            pointer-events: none;
         }
 
-        /* ОБЩИЕ СТИЛИ */
-        .line-accent { 
-            color: var(--gold); font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; 
-            border-top: 1px solid rgba(197, 160, 89, 0.4); padding-top: 15px; margin-top: 15px; display: inline-block;
+        /* КОНТЕЙНЕР СЛАЙДОВ */
+        .slides-horizontal-wrapper {
+            display: flex;
+            width: 200vw; 
+            height: 100vh;
+            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+            will-change: transform;
         }
-        .header-title { font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 30px; opacity: 0.6; text-align: center; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ */
+        section.slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* СЛАЙД 1: МАНИФЕСТ */
+        .visual-panel-1 {
+            width: 50%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5%;
+        }
+
+        .logo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.98);
+            animation: fadeInLogo 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInLogo {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .logo-main {
+            /* Еще более компактный размер для создания ощущения эксклюзивности */
+            max-width: 35%;
+            max-height: 30%;
+            object-fit: contain;
+            transition: opacity 0.4s ease;
+        }
+        
+        .logo-main:hover {
+            opacity: 0.8;
+        }
+
+        .content-panel-1 {
+            width: 50%;
+            background-color: var(--deep-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typography-anchor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .intro-top-text {
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .wide-spacing {
+            font-size: clamp(12px, 1.1vw, 14px);
+            letter-spacing: 0.5em; 
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .narrow-spacing {
+            font-size: clamp(9px, 0.75vw, 10.5px);
+            letter-spacing: 0.05em;
+            display: block;
+            opacity: 0.6;
+        }
+
+        .line-accent-compact {
+            color: var(--gold);
+            font-size: clamp(18px, 2vw, 24px);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.45em;
+            margin-right: -0.45em;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            padding-top: 20px;
+            display: inline-block;
+        }
+
+        /* СЛАЙД 2: ПРОИЗВОДСТВО */
+        .slide-factory-2 {
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 100px 8% 120px;
+            overflow-y: auto;
+        }
+
+        .process-strip {
+            display: flex;
+            width: 100%;
+            height: 38vh;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-shrink: 0;
+        }
+
+        .panel-item {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+
+        .panel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .panel-item:hover img { filter: grayscale(0%); }
+
+        .factory-bullets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px 60px;
+            max-width: 1000px;
+            width: 100%;
+            padding-bottom: 40px;
+        }
+
+        .bullet-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .bullet-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--gold);
+            margin-top: 10px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .bullet-content p {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+
+        /* УПРАВЛЕНИЕ НАВИГАЦИЕЙ */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            z-index: 1001;
+            padding: 10px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: 50px;
+        }
+
+        .arrow-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            opacity: 0.4;
+            transition: 0.3s;
+        }
+        .arrow-btn:not(.disabled):hover { opacity: 1; }
+        .arrow-btn.disabled { opacity: 0; pointer-events: none; }
+        .arrow-svg { width: 30px; height: 12px; fill: none; stroke: var(--gold); stroke-width: 1.5; }
+        .counter { font-size: 10px; letter-spacing: 0.2em; color: var(--gold); }
+
         @media (max-width: 768px) {
-            body, html { overflow-y: auto; scroll-snap-type: y mandatory; height: 100%; }
-            .side-dots { display: flex; }
-            .desktop-grid { display: none; }
-            .slide { 
-                width: 100vw; height: 100vh; flex-shrink: 0; display: flex; flex-direction: column; 
-                justify-content: center; align-items: center; scroll-snap-align: start; scroll-snap-stop: always; padding: 20px;
+            .factory-bullets { grid-template-columns: 1fr; gap: 20px; }
+            .process-strip { 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+                height: auto; 
+                gap: 8px;
+                margin-bottom: 25px;
             }
-            .slide-1 { background: var(--black); }
-            .logo-mobile { display: block; width: auto; height: 70px; margin-bottom: 30px; }
-            
-            /* АККОРДЕОН */
-            .slide-factory-2 { background: #fff; color: #333; }
-            .slide-partners-3 { background: var(--black); color: white; }
-            .accordion-container { width: 100%; display: flex; flex-direction: column; gap: 10px; }
-            .acc-card {
-                width: 100%; height: 55px; background: rgba(255,255,255,0.03); border-left: 2px solid var(--gold);
-                overflow: hidden; transition: all 0.5s ease; display: flex; flex-direction: column;
-            }
-            .slide-factory-2 .acc-card { background: #f9f9f9; border-left: 3px solid var(--gold); }
-            .acc-card.active { height: auto; min-height: 140px; background: rgba(197, 160, 89, 0.05); }
-            .slide-factory-2 .acc-card.active { background: #fff; }
-            .acc-header { min-height: 55px; display: flex; align-items: center; padding: 0 15px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
-            .acc-content { padding: 0 15px 20px; opacity: 0; transition: opacity 0.3s ease; font-family: 'Playfair Display'; font-size: 13px; line-height: 1.6; }
-            .acc-card.active .acc-content { opacity: 1; }
-            .nav-controls, .footer-brand { display: none; }
+            .panel-item { aspect-ratio: 1/1; }
+            .visual-panel-1 { display: none; }
+            .content-panel-1 { width: 100%; }
+            .nav-controls { bottom: 15px; }
+            .slide-factory-2 { padding-bottom: 80px; }
+            .logo-main { max-width: 60%; }
         }
     </style>
 </head>
 <body>
 
-<header class="fixed-header">
-    <div>J VILA</div>
-    <div>VALENCIA / EST. 1980</div>
-</header>
+    <header class="fixed-header">
+        <div>J VILA</div>
+        <div>VALENCIA / EST. 1980</div>
+    </header>
 
-<div class="side-dots">
-    <div class="dot active" data-slide="0" onclick="scrollToSlide(0)"></div>
-    <div class="dot" data-slide="1" onclick="scrollToSlide(1)"></div>
-    <div class="dot" data-slide="2" onclick="scrollToSlide(2)"></div>
-</div>
+    <footer class="fixed-footer-global">
+        © 2026
+    </footer>
 
-<div class="viewport">
-    <div class="slides-wrapper" id="mainWrapper">
+    <div class="nav-controls">
+        <button class="arrow-btn disabled" id="prevBtn" onclick="moveSlide(-1)">
+            <svg class="arrow-svg" viewBox="0 0 30 14"><path d="M7 1L1 7L7 13M1 7H29" /></svg>
+        </button>
+        <div class="counter" id="counterDisplay">01 / 02</div>
+        <button class="arrow-btn" id="nextBtn" onclick="moveSlide(1)">
+            <svg class="arrow-svg" viewBox="0 0 30 14" style="transform: rotate(180deg);"><path d="M7 1L1 7L7 13M1 7H29" /></svg>
+        </button>
+    </div>
+
+    <div class="slides-horizontal-wrapper" id="wrapper">
         
-        <section class="slide slide-1" id="s0">
+        <!-- СЛАЙД 1: МАНИФЕСТ -->
+        <section class="slide">
             <div class="visual-panel-1">
-                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-desktop">
-                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/refs/heads/main/IMG_20260104_135837.png" class="logo-mobile">
+                <div class="logo-container">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1TUtJP2lwTmzFsrHL-xzOHnRYIO9qN5Qg" alt="[Логотип J VILA]" class="logo-main" onerror="this.src='https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800'">
+                </div>
             </div>
             <div class="content-panel-1">
-                <span style="font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase;">Реализуя то,</span>
-                <span style="font-size: 10px; letter-spacing: 0.15em; opacity: 0.6; text-transform: uppercase; margin-top: 5px;">ЧТО ДРУГИЕ СЧИТАЮТ</span>
-                <div class="line-accent">невозможным</div>
-            </div>
-        </section>
-
-        <section class="slide slide-factory-2" id="s1">
-            <div class="header-title" style="color:#333">Производство</div>
-            <div class="desktop-grid">
-                <div class="bullet-item">Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</div>
-                <div class="bullet-item">45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</div>
-                <div class="bullet-item">Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</div>
-                <div class="bullet-item">Бережное сохранение традиций в сочетании с миром современных технологий.</div>
-            </div>
-            <div class="accordion-container">
-                <div class="acc-card active" onclick="toggleAcc(this)">
-                    <div class="acc-header">Локация</div>
-                    <div class="acc-content">Собственное производство в Валенсии (Испания) без аутсорсинга в третьи страны для безупречного контроля качества каждой детали.</div>
-                </div>
-                <div class="acc-card" onclick="toggleAcc(this)">
-                    <div class="acc-header">Опыт</div>
-                    <div class="acc-content">45-летний профессиональный опыт позволяет реализовывать уникальные проекты любой технической сложности с 1980 года.</div>
-                </div>
-                <div class="acc-card" onclick="toggleAcc(this)">
-                    <div class="acc-header">Материалы</div>
-                    <div class="acc-content">Использование компонентов премиум-класса: оригинального хрусталя Asfour и высокотехнологичного стекла Schott.</div>
-                </div>
-                <div class="acc-card" onclick="toggleAcc(this)">
-                    <div class="acc-header">Традиции</div>
-                    <div class="acc-content">Бережное сохранение ремесленных традиций Валенсии в сочетании с миром современных световых технологий.</div>
+                <div class="typography-anchor">
+                    <div class="intro-top-text">
+                        <span class="wide-spacing">Реализуя то,</span>
+                        <span class="narrow-spacing">что другие считают</span>
+                    </div>
+                    <div class="line-accent-compact">невозможным</div>
                 </div>
             </div>
         </section>
 
-        <section class="slide slide-partners-3" id="s2">
-            <div class="header-title" style="color:var(--gold)">Сотрудничество</div>
-            <div class="desktop-grid">
-                <div class="bullet-item">Дизайнеры интерьеров: реализация идей в любом стиле без привязки к стандартам.</div>
-                <div class="bullet-item">Архитекторы: кастомизация изделий под масштабные объекты.</div>
-                <div class="bullet-item">Дизайн-бюро: контроль реализации и четкие сроки производства.</div>
-                <div class="bullet-item">HoReCa: работа с большими объемами для отелей и ресторанов.</div>
+        <!-- СЛАЙД 2: ПРОИЗВОДСТВО -->
+        <section class="slide slide-factory-2">
+            <div class="process-strip">
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="[Производство освещения]"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800" alt="[Хрусталь люстры]"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?auto=format&fit=crop&q=80&w=800" alt="[Детали светильника]"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?auto=format&fit=crop&q=80&w=800" alt="[Интерьерное освещение]"></div>
             </div>
-            <div class="accordion-container">
-                <div class="acc-card active" onclick="toggleAcc(this)">
-                    <div class="acc-header">Дизайнеры</div>
-                    <div class="acc-content">Работа в широком диапазоне стилей — от классики до современного дизайна — с возможностью реализовать смелые идеи без привязки к стандартным формам.</div>
+            
+            <div class="factory-bullets">
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</p>
+                    </div>
                 </div>
-                <div class="acc-card" onclick="toggleAcc(this)">
-                    <div class="acc-header">Архитекторы</div>
-                    <div class="acc-content">Кастомизация изделий вплоть до крупномасштабных объектов, где размеры, пропорции и конструкция проектируются под пространство.</div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</p>
+                    </div>
                 </div>
-                <div class="acc-card" onclick="toggleAcc(this)">
-                    <div class="acc-header">Дизайн-бюро</div>
-                    <div class="acc-content">Производство, позволяющее вести проекты с единым уровнем качества, понятными сроками и полным контролем реализации.</div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</p>
+                    </div>
                 </div>
-                <div class="acc-card" onclick="toggleAcc(this)">
-                    <div class="acc-header">HoReCa</div>
-                    <div class="acc-content">Работа с большими объёмами — от центральных световых композиций до серийных изделий для номерного фонда отелей.</div>
+                <div class="bullet-item">
+                    <div class="bullet-dot"></div>
+                    <div class="bullet-content">
+                        <p>Бережное сохранение традиционных техник мастерства в сочетании с миром современных технологий.</p>
+                    </div>
                 </div>
             </div>
         </section>
+
     </div>
-</div>
 
-<nav class="nav-controls">
-    <button class="arrow-btn" onclick="changeSlide(-1)">←</button>
-    <div class="counter" id="slideCounter">01 / 03</div>
-    <button class="arrow-btn" onclick="changeSlide(1)">→</button>
-</nav>
+    <script>
+        let currentIdx = 0;
+        const totalSlides = 2;
+        const wrapper = document.getElementById('wrapper');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const counterDisplay = document.getElementById('counterDisplay');
 
-<script>
-    function toggleAcc(el) {
-        if (window.innerWidth > 768) return;
-        const container = el.closest('.accordion-container');
-        container.querySelectorAll('.acc-card').forEach(card => card.classList.remove('active'));
-        el.classList.add('active');
-    }
+        function moveSlide(direction) {
+            const nextIdx = currentIdx + direction;
+            if (nextIdx >= 0 && nextIdx < totalSlides) {
+                currentIdx = nextIdx;
+                updateUI();
+            }
+        }
 
-    function scrollToSlide(index) {
-        document.getElementById('s' + index).scrollIntoView({ behavior: 'smooth' });
-    }
+        function updateUI() {
+            wrapper.style.transform = `translateX(-${currentIdx * 100}vw)`;
+            prevBtn.classList.toggle('disabled', currentIdx === 0);
+            nextBtn.classList.toggle('disabled', currentIdx === totalSlides - 1);
+            counterDisplay.innerText = `0${currentIdx + 1} / 0${totalSlides}`;
+        }
 
-    if (window.innerWidth <= 768) {
-        const dots = document.querySelectorAll('.dot');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id.replace('s', '');
-                    dots.forEach(dot => dot.classList.toggle('active', dot.dataset.slide === id));
-                }
-            });
-        }, { threshold: 0.6 });
-        document.querySelectorAll('.slide').forEach(s => observer.observe(s));
-    }
+        let isThrottled = false;
+        window.addEventListener('wheel', e => {
+            if (isThrottled) return;
+            if (Math.abs(e.deltaY) > 30) {
+                isThrottled = true;
+                moveSlide(e.deltaY > 0 ? 1 : -1);
+                setTimeout(() => isThrottled = false, 1200);
+            }
+        }, {passive: true});
 
-    let currentSlide = 0;
-    const wrapper = document.getElementById('mainWrapper');
-    const counter = document.getElementById('slideCounter');
-    function changeSlide(dir) {
-        if (window.innerWidth <= 768) return;
-        currentSlide = Math.max(0, Math.min(currentSlide + dir, 2));
-        wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
-        counter.innerText = `0${currentSlide + 1} / 03`;
-    }
-</script>
-
+        let touchX = 0;
+        window.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+        window.addEventListener('touchend', e => {
+            const deltaX = touchX - e.changedTouches[0].clientX;
+            if (Math.abs(deltaX) > 50) moveSlide(deltaX > 0 ? 1 : -1);
+        });
+    </script>
 </body>
 </html>
+
+
+
+
