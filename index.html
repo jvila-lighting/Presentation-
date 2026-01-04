@@ -20,16 +20,17 @@
 
         /* ТОЧКИ (МОБИЛЬНЫЕ) */
         .side-dots {
-            position: fixed; right: 15px; top: 50%;
+            position: fixed; right: 20px; top: 50%;
             transform: translateY(-50%); display: none;
-            flex-direction: column; gap: 15px; z-index: 3000;
+            flex-direction: column; gap: 20px; z-index: 3000;
         }
         .dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: rgba(197, 160, 89, 0.2); border: 1px solid var(--gold);
-            transition: all 0.3s ease; cursor: pointer;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: transparent; border: 1.5px solid var(--gold);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer; opacity: 0.4;
         }
-        .dot.active { background: var(--gold); transform: scale(1.5); }
+        .dot.active { background: var(--gold); transform: scale(1.6); opacity: 1; box-shadow: 0 0 10px rgba(197, 160, 89, 0.4); }
 
         .fixed-header {
             position: fixed; top: 0; width: 100%;
@@ -50,73 +51,51 @@
             
             .logo-mobile { display: none; }
             .logo-desktop { display: block; height: 110px; width: auto; }
-            .slide-partners-3 { padding: 0 10% 120px 10% !important; justify-content: center !important; }
 
+            /* Десктопная сетка (полный текст) */
+            .desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 60px; width: 85%; max-width: 1100px; margin: 0 auto; }
+            .bullet-item { display: flex; gap: 15px; font-family: 'Playfair Display'; font-size: 14px; line-height: 1.6; text-align: left; }
+            .bullet-item::before { content: ""; width: 6px; height: 6px; background: var(--gold); margin-top: 8px; flex-shrink: 0; }
+            
+            .accordion-container { display: none; }
             .nav-controls { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 60px; z-index: 2000; }
             .footer-brand { position: fixed; bottom: 45px; right: 60px; color: var(--gold); font-size: 10px; opacity: 0.6; }
         }
 
-        /* ОБЩИЕ СТИЛИ КОНТЕНТА */
+        /* ОБЩИЕ СТИЛИ */
         .line-accent { 
-            color: var(--gold); font-size: 20px; letter-spacing: 0.38em; text-transform: uppercase; 
-            border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 18px; margin-top: 20px; 
+            color: var(--gold); font-size: 18px; letter-spacing: 0.2em; text-transform: uppercase; 
+            border-top: 1px solid rgba(197, 160, 89, 0.4); padding-top: 15px; margin-top: 15px; display: inline-block;
         }
+        .header-title { font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 30px; opacity: 0.6; text-align: center; }
 
-        .slide-factory-2 { background: white; color: #333; flex-direction: column; justify-content: center; }
-        .process-strip { display: flex; gap: 10px; width: 85%; height: 30vh; margin-bottom: 40px; }
-        .panel-item { flex: 1; overflow: hidden; }
-        .panel-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
-        
-        .factory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px 60px; width: 85%; max-width: 1100px; }
-        .bullet-item { display: flex; gap: 15px; font-family: 'Playfair Display'; font-size: 14px; line-height: 1.6; }
-        .bullet-item::before { content: ""; width: 6px; height: 6px; background: var(--gold); margin-top: 8px; flex-shrink: 0; }
-
-        .slide-partners-3 { flex-direction: column; justify-content: center; padding: 80px 10%; }
-        .partners-header { font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 50px; opacity: 0.6; text-align: center; }
-        .partners-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 80px; width: 100%; max-width: 1000px; }
-        .partner-item { border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 20px; }
-        .partner-item h3 { color: var(--gold); font-size: 11px; letter-spacing: 0.25em; margin-bottom: 12px; text-transform: uppercase; font-weight: 400; }
-        .partner-item p { font-family: 'Playfair Display'; font-size: 13px; line-height: 1.7; opacity: 0.9; }
-
-        /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
+        /* МОБИЛЬНАЯ ВЕРСИЯ */
         @media (max-width: 768px) {
-            body, html { overflow-y: scroll; scroll-snap-type: y mandatory; height: 100vh; }
+            body, html { overflow-y: auto; scroll-snap-type: y mandatory; height: 100%; }
             .side-dots { display: flex; }
+            .desktop-grid { display: none; }
             .slide { 
-                width: 100vw; height: 100vh; flex-shrink: 0; 
-                display: flex; flex-direction: column; 
-                justify-content: center; align-items: center; /* Центровка всего содержимого */
-                scroll-snap-align: start; scroll-snap-stop: always; 
-                padding: 20px;
+                width: 100vw; height: 100vh; flex-shrink: 0; display: flex; flex-direction: column; 
+                justify-content: center; align-items: center; scroll-snap-align: start; scroll-snap-stop: always; padding: 20px;
             }
-            
             .slide-1 { background: var(--black); }
+            .logo-mobile { display: block; width: auto; height: 70px; margin-bottom: 30px; }
             
-            /* Исправленный размер логотипа на мобильном */
-            .logo-mobile { 
-                display: block; 
-                width: auto; 
-                height: 80px; /* Фиксированная небольшая высота */
-                margin: 0 auto 40px; 
+            /* АККОРДЕОН */
+            .slide-factory-2 { background: #fff; color: #333; }
+            .slide-partners-3 { background: var(--black); color: white; }
+            .accordion-container { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+            .acc-card {
+                width: 100%; height: 55px; background: rgba(255,255,255,0.03); border-left: 2px solid var(--gold);
+                overflow: hidden; transition: all 0.5s ease; display: flex; flex-direction: column;
             }
-            .logo-desktop { display: none; }
-
-            .slide-1 .content-panel-1 { 
-                width: 100%; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center; 
-            }
-            .mobile-br { display: block; height: 10px; }
-
-            .slide-factory-2, .slide-partners-3 { padding: 80px 30px 40px !important; display: block; overflow-y: auto; }
-            .process-strip { flex-direction: column; height: auto; width: 100%; gap: 8px; margin-bottom: 20px; }
-            .panel-item { height: 90px; }
-            .factory-grid, .partners-grid { grid-template-columns: 1fr; width: 100%; gap: 20px; }
-            
+            .slide-factory-2 .acc-card { background: #f9f9f9; border-left: 3px solid var(--gold); }
+            .acc-card.active { height: auto; min-height: 140px; background: rgba(197, 160, 89, 0.05); }
+            .slide-factory-2 .acc-card.active { background: #fff; }
+            .acc-header { min-height: 55px; display: flex; align-items: center; padding: 0 15px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+            .acc-content { padding: 0 15px 20px; opacity: 0; transition: opacity 0.3s ease; font-family: 'Playfair Display'; font-size: 13px; line-height: 1.6; }
+            .acc-card.active .acc-content { opacity: 1; }
             .nav-controls, .footer-brand { display: none; }
-            .fixed-header { padding: 20px; background: linear-gradient(to bottom, rgba(10,10,10,1), transparent); }
         }
     </style>
 </head>
@@ -128,58 +107,78 @@
 </header>
 
 <div class="side-dots">
-    <div class="dot active" onclick="scrollToSlide(0)"></div>
-    <div class="dot" onclick="scrollToSlide(1)"></div>
-    <div class="dot" onclick="scrollToSlide(2)"></div>
+    <div class="dot active" data-slide="0" onclick="scrollToSlide(0)"></div>
+    <div class="dot" data-slide="1" onclick="scrollToSlide(1)"></div>
+    <div class="dot" data-slide="2" onclick="scrollToSlide(2)"></div>
 </div>
 
 <div class="viewport">
     <div class="slides-wrapper" id="mainWrapper">
+        
         <section class="slide slide-1" id="s0">
             <div class="visual-panel-1">
                 <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-desktop">
                 <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/refs/heads/main/IMG_20260104_135837.png" class="logo-mobile">
             </div>
             <div class="content-panel-1">
-                <span style="font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase; opacity: 0.9;">Реализуя то,</span>
-                <div class="mobile-br"></div>
-                <span style="font-size: 10px; letter-spacing: 0.15em; opacity: 0.6; text-transform: uppercase;">ЧТО ДРУГИЕ СЧИТАЮТ</span>
+                <span style="font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase;">Реализуя то,</span>
+                <span style="font-size: 10px; letter-spacing: 0.15em; opacity: 0.6; text-transform: uppercase; margin-top: 5px;">ЧТО ДРУГИЕ СЧИТАЮТ</span>
                 <div class="line-accent">невозможным</div>
             </div>
         </section>
 
         <section class="slide slide-factory-2" id="s1">
-            <div class="process-strip">
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800"></div>
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800"></div>
-                <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?w=800"></div>
-            </div>
-            <div class="factory-grid">
+            <div class="header-title" style="color:#333">Производство</div>
+            <div class="desktop-grid">
                 <div class="bullet-item">Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</div>
                 <div class="bullet-item">45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</div>
                 <div class="bullet-item">Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</div>
                 <div class="bullet-item">Бережное сохранение традиций в сочетании с миром современных технологий.</div>
             </div>
+            <div class="accordion-container">
+                <div class="acc-card active" onclick="toggleAcc(this)">
+                    <div class="acc-header">Локация</div>
+                    <div class="acc-content">Собственное производство в Валенсии (Испания) без аутсорсинга в третьи страны для безупречного контроля качества каждой детали.</div>
+                </div>
+                <div class="acc-card" onclick="toggleAcc(this)">
+                    <div class="acc-header">Опыт</div>
+                    <div class="acc-content">45-летний профессиональный опыт позволяет реализовывать уникальные проекты любой технической сложности с 1980 года.</div>
+                </div>
+                <div class="acc-card" onclick="toggleAcc(this)">
+                    <div class="acc-header">Материалы</div>
+                    <div class="acc-content">Использование компонентов премиум-класса: оригинального хрусталя Asfour и высокотехнологичного стекла Schott.</div>
+                </div>
+                <div class="acc-card" onclick="toggleAcc(this)">
+                    <div class="acc-header">Традиции</div>
+                    <div class="acc-content">Бережное сохранение ремесленных традиций Валенсии в сочетании с миром современных световых технологий.</div>
+                </div>
+            </div>
         </section>
 
         <section class="slide slide-partners-3" id="s2">
-            <div class="partners-header">Возможности сотрудничества</div>
-            <div class="partners-grid">
-                <div class="partner-item">
-                    <h3>Дизайнеры интерьеров</h3>
-                    <p>Работа в широком диапазоне стилей — от классики до современного дизайна — с возможностью реализовать смелые идеи без привязки к стандартным формам и типовым решениям</p>
+            <div class="header-title" style="color:var(--gold)">Сотрудничество</div>
+            <div class="desktop-grid">
+                <div class="bullet-item">Дизайнеры интерьеров: реализация идей в любом стиле без привязки к стандартам.</div>
+                <div class="bullet-item">Архитекторы: кастомизация изделий под масштабные объекты.</div>
+                <div class="bullet-item">Дизайн-бюро: контроль реализации и четкие сроки производства.</div>
+                <div class="bullet-item">HoReCa: работа с большими объемами для отелей и ресторанов.</div>
+            </div>
+            <div class="accordion-container">
+                <div class="acc-card active" onclick="toggleAcc(this)">
+                    <div class="acc-header">Дизайнеры</div>
+                    <div class="acc-content">Работа в широком диапазоне стилей — от классики до современного дизайна — с возможностью реализовать смелые идеи без привязки к стандартным формам.</div>
                 </div>
-                <div class="partner-item">
-                    <h3>Архитекторы</h3>
-                    <p>Кастомизация изделий вплоть до крупномасштабных, архитектурно значимых объектов, где размеры, пропорции и конструкция проектируются под пространство</p>
+                <div class="acc-card" onclick="toggleAcc(this)">
+                    <div class="acc-header">Архитекторы</div>
+                    <div class="acc-content">Кастомизация изделий вплоть до крупномасштабных объектов, где размеры, пропорции и конструкция проектируются под пространство.</div>
                 </div>
-                <div class="partner-item">
-                    <h3>Дизайн-бюро и студии</h3>
-                    <p>Производство, позволяющее вести несколько проектов параллельно с единым уровнем качества, понятными сроками и контролем реализации</p>
+                <div class="acc-card" onclick="toggleAcc(this)">
+                    <div class="acc-header">Дизайн-бюро</div>
+                    <div class="acc-content">Производство, позволяющее вести проекты с единым уровнем качества, понятными сроками и полным контролем реализации.</div>
                 </div>
-                <div class="partner-item">
-                    <h3 style="font-weight: 600;">HoReCa</h3>
-                    <p>Работа с большими объёмами — от центральных световых композиций до серийных изделий для номерного фонда и общественных зон</p>
+                <div class="acc-card" onclick="toggleAcc(this)">
+                    <div class="acc-header">HoReCa</div>
+                    <div class="acc-content">Работа с большими объёмами — от центральных световых композиций до серийных изделий для номерного фонда отелей.</div>
                 </div>
             </div>
         </section>
@@ -192,19 +191,12 @@
     <button class="arrow-btn" onclick="changeSlide(1)">→</button>
 </nav>
 
-<footer class="footer-brand">© 2026</footer>
-
 <script>
-    let currentSlide = 0;
-    const wrapper = document.getElementById('mainWrapper');
-    const counter = document.getElementById('slideCounter');
-    const dots = document.querySelectorAll('.dot');
-
-    function changeSlide(dir) {
-        if (window.innerWidth <= 768) return;
-        currentSlide = Math.max(0, Math.min(currentSlide + dir, 2));
-        wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
-        counter.innerText = `0${currentSlide + 1} / 03`;
+    function toggleAcc(el) {
+        if (window.innerWidth > 768) return;
+        const container = el.closest('.accordion-container');
+        container.querySelectorAll('.acc-card').forEach(card => card.classList.remove('active'));
+        el.classList.add('active');
     }
 
     function scrollToSlide(index) {
@@ -212,20 +204,27 @@
     }
 
     if (window.innerWidth <= 768) {
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const activeIndex = Math.round(scrollPos / windowHeight);
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === activeIndex);
+        const dots = document.querySelectorAll('.dot');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id.replace('s', '');
+                    dots.forEach(dot => dot.classList.toggle('active', dot.dataset.slide === id));
+                }
             });
-        });
+        }, { threshold: 0.6 });
+        document.querySelectorAll('.slide').forEach(s => observer.observe(s));
     }
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight') changeSlide(1);
-        if (e.key === 'ArrowLeft') changeSlide(-1);
-    });
+    let currentSlide = 0;
+    const wrapper = document.getElementById('mainWrapper');
+    const counter = document.getElementById('slideCounter');
+    function changeSlide(dir) {
+        if (window.innerWidth <= 768) return;
+        currentSlide = Math.max(0, Math.min(currentSlide + dir, 2));
+        wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
+        counter.innerText = `0${currentSlide + 1} / 03`;
+    }
 </script>
 
 </body>
