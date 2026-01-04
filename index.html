@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>J VILA Presentation</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
     
@@ -12,44 +12,60 @@
             --deep-black: #0a0a0a;
         }
 
-        /* Базовые настройки, чтобы ничего не вылезало */
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            overflow: hidden; /* Запрещаем обычный скролл */
+            overflow: hidden;
             background-color: var(--deep-black);
             font-family: 'Cinzel', serif;
         }
 
-        /* ХЕДЕР */
+        /* ФИКСИРОВАННЫЕ ЭЛЕМЕНТЫ — ПРИВЯЗКА К ЭКРАНУ */
         .fixed-header {
-            position: fixed; top: 0; width: 100%;
+            position: fixed; top: 0; left: 0; width: 100%;
             padding: 40px 60px;
             display: flex; justify-content: space-between;
             text-transform: uppercase; letter-spacing: 0.4em;
-            font-size: 11px; color: var(--gold); z-index: 1000;
+            font-size: 11px; color: var(--gold); z-index: 2000;
+            pointer-events: none; /* Чтобы не мешал кликам */
         }
 
-        /* ГЛАВНЫЙ КОНТЕЙНЕР ДЛЯ ГОРИЗОНТАЛЬНОГО ДВИЖЕНИЯ */
-        .slides-horizontal-wrapper { 
-            display: flex; 
-            flex-direction: row; /* Принудительно в ряд */
-            flex-wrap: nowrap;   /* Запрещаем перенос на новую строку */
-            width: 300vw;        /* Ширина в 3 экрана */
-            height: 100vh; 
-            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1); 
-            will-change: transform;
+        .nav-controls {
+            position: fixed; bottom: 45px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; align-items: center; gap: 60px;
+            z-index: 2000;
         }
 
-        /* КАЖДЫЙ СЛАЙД */
-        .slide { 
-            width: 100vw; 
-            height: 100vh; 
-            flex-shrink: 0; /* Запрещаем слайдам сжиматься */
-            display: flex; 
+        .footer-brand { 
+            position: fixed; bottom: 45px; right: 60px; 
+            color: var(--gold); font-size: 10px; opacity: 0.6; z-index: 2000;
+        }
+
+        /* КОНТЕЙНЕР СЛАЙДОВ */
+        .viewport {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 300vw; /* 3 слайда */
+            height: 100vh;
+            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
             align-items: center;
+            overflow: hidden;
             position: relative;
         }
 
@@ -57,36 +73,40 @@
         .slide-1 { background: var(--deep-black); }
         .visual-panel-1 { width: 50%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; }
         .logo-img { height: 110px; width: auto; }
-        .content-panel-1 { width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
-        .intro-top-text { text-align: center; margin-bottom: 20px; }
-        .wide-spacing { font-size: 14px; letter-spacing: 0.5em; display: block; margin-bottom: 6px; text-transform: uppercase; }
-        .narrow-spacing { font-size: 10px; letter-spacing: 0.15em; display: block; opacity: 0.7; text-transform: uppercase; }
-        .line-accent-compact { color: var(--gold); font-size: 20px; letter-spacing: 0.38em; text-transform: uppercase; border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 18px; }
+        .content-panel-1 { width: 50%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+        .line-accent-compact { color: var(--gold); font-size: 20px; letter-spacing: 0.38em; text-transform: uppercase; border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 18px; margin-top: 20px; }
+        .wide-spacing { font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .narrow-spacing { font-size: 10px; letter-spacing: 0.15em; opacity: 0.7; text-transform: uppercase; }
 
         /* СЛАЙД 2 */
         .slide-factory-2 { background: white; flex-direction: column; justify-content: center; }
         .process-strip { display: flex; gap: 20px; width: 85%; height: 35vh; margin-bottom: 40px; justify-content: center; }
-        .panel-item { flex: 1; max-width: 320px; overflow: hidden; background: #eee; }
+        .panel-item { flex: 1; max-width: 320px; height: 100%; background: #f0f0f0; }
         .panel-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
         .factory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px 80px; width: 85%; max-width: 1100px; margin: 0 auto; }
         .bullet-item { display: flex; align-items: flex-start; }
         .gold-marker { width: 6px; height: 6px; background: var(--gold); margin: 10px 15px 0 0; flex-shrink: 0; }
-        .bullet-item p { font-family: 'Playfair Display'; font-size: 14px; line-height: 1.6; color: #333; }
+        .bullet-item p { font-family: 'Playfair Display'; font-size: 14px; line-height: 1.6; color: #333; margin: 0; }
 
         /* СЛАЙД 3 */
         .slide-partners-3 { background: var(--deep-black); flex-direction: column; justify-content: center; padding-top: 60px; }
-        .partners-header { color: white; text-align: center; font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 7vh; opacity: 0.65; }
-        .partners-grid-fixed { display: grid; grid-template-columns: 1fr 1fr; gap: 45px 100px; width: 85%; max-width: 1000px; margin: 0 auto; }
-        .partner-item { border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 22px; }
-        .partner-item h3 { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; margin-bottom: 15px; text-transform: uppercase; font-weight: 400; }
+        .partners-header { color: white; text-align: center; font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 6vh; opacity: 0.65; }
+        .partners-grid-fixed { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 100px; width: 85%; max-width: 1000px; margin: 0 auto; }
+        .partner-item { border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 20px; }
+        .partner-item h3 { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; margin-bottom: 12px; text-transform: uppercase; font-weight: 400; }
         .partner-item h3.latin-weight { font-weight: 600; }
-        .partner-item p { font-family: 'Playfair Display', serif; color: rgba(255, 255, 255, 0.9); font-size: 13px; line-height: 1.8; letter-spacing: 0.04em; margin: 0; }
+        .partner-item p { font-family: 'Playfair Display', serif; color: rgba(255, 255, 255, 0.9); font-size: 13px; line-height: 1.7; letter-spacing: 0.04em; margin: 0; }
 
-        /* НАВИГАЦИЯ */
-        .nav-controls { position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 60px; z-index: 1001; }
-        .arrow-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 24px; }
-        .counter { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; }
-        .footer-brand { position: fixed; bottom: 45px; right: 60px; color: var(--gold); font-size: 10px; opacity: 0.6; }
+        /* КНОПКИ */
+        .arrow-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 24px; padding: 10px; z-index: 3000; }
+        .counter { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; min-width: 80px; text-align: center; }
+
+        /* Адаптация для планшетов */
+        @media (max-width: 1024px) {
+            .fixed-header { padding: 30px; }
+            .factory-grid, .partners-grid-fixed { gap: 30px; }
+            .logo-img { height: 80px; }
+        }
     </style>
 </head>
 <body>
@@ -96,68 +116,74 @@
     <div>VALENCIA / EST. 1980</div>
 </header>
 
-<div class="slides-horizontal-wrapper" id="wrapper">
-    <section class="slide slide-1">
-        <div class="visual-panel-1"><img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-img"></div>
-        <div class="content-panel-1">
-            <div class="intro-top-text"><span class="wide-spacing">Реализуя то,</span><span class="narrow-spacing">ЧТО ДРУГИЕ СЧИТАЮТ</span></div>
-            <div class="line-accent-compact">невозможным</div>
-        </div>
-    </section>
+<div class="viewport">
+    <div class="slides-wrapper" id="mainWrapper">
+        <section class="slide slide-1">
+            <div class="visual-panel-1">
+                <img src="https://raw.githubusercontent.com/jvila-lighting/Presentation-/3967a6a5e8ef965b6a09f716d965bc2493837ff4/1767429491312.jpg" class="logo-img">
+            </div>
+            <div class="content-panel-1">
+                <div class="intro-top-text">
+                    <span class="wide-spacing">Реализуя то,</span>
+                    <span class="narrow-spacing">ЧТО ДРУГИЕ СЧИТАЮТ</span>
+                </div>
+                <div class="line-accent-compact">невозможным</div>
+            </div>
+        </section>
 
-    <section class="slide slide-factory-2">
-        <div class="process-strip">
-            <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800"></div>
-            <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800"></div>
-            <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?w=800"></div>
-        </div>
-        <div class="factory-grid">
-            <div class="bullet-item"><div class="gold-marker"></div><p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</p></div>
-            <div class="bullet-item"><div class="gold-marker"></div><p>45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</p></div>
-            <div class="bullet-item"><div class="gold-marker"></div><p>Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</p></div>
-            <div class="bullet-item"><div class="gold-marker"></div><p>Бережное сохранение традиций в сочетании с миром современных технологий.</p></div>
-        </div>
-    </section>
+        <section class="slide slide-factory-2">
+            <div class="process-strip">
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800"></div>
+                <div class="panel-item"><img src="https://images.unsplash.com/photo-1574359411659-15573a27f0c1?w=800"></div>
+            </div>
+            <div class="factory-grid">
+                <div class="bullet-item"><div class="gold-marker"></div><p>Собственное производство в Валенсии без аутсорсинга в третьи страны для безупречного контроля качества.</p></div>
+                <div class="bullet-item"><div class="gold-marker"></div><p>45-летний профессиональный опыт для реализации уникальных проектов любой технической сложности.</p></div>
+                <div class="bullet-item"><div class="gold-marker"></div><p>Использование компонентов премиум-класса: хрусталя Asfour и высокотехнологичного стекла Schott.</p></div>
+                <div class="bullet-item"><div class="gold-marker"></div><p>Бережное сохранение традиций в сочетании с миром современных технологий.</p></div>
+            </div>
+        </section>
 
-    <section class="slide slide-partners-3">
-        <div class="partners-header">Возможности сотрудничества</div>
-        <div class="partners-grid-fixed">
-            <div class="partner-item"><h3>Дизайнеры интерьеров</h3><p>Работа в широком диапазоне стилей — от классики до современного дизайна — с возможностью реализовать смелые идеи без привязки к стандартным формам и типовым решениям.</p></div>
-            <div class="partner-item"><h3>Архитекторы</h3><p>Кастомизация изделий вплоть до крупномасштабных, архитектурно значимых объектов, где размеры, пропорции и конструкция проектируются под пространство.</p></div>
-            <div class="partner-item"><h3>Дизайн-бюро и студии</h3><p>Предсказуемое производство, позволяющее вести несколько проектов параллельно с единым уровнем качества, понятными сроками и контролем реализации.</p></div>
-            <div class="partner-item"><h3 class="latin-weight">HoReCa</h3><p>Работа с большими объёмами — от центральных световых композиций до серийных изделий для номерного фонда и общественных зон.</p></div>
-        </div>
-    </section>
+        <section class="slide slide-partners-3">
+            <div class="partners-header">Возможности сотрудничества</div>
+            <div class="partners-grid-fixed">
+                <div class="partner-item"><h3>Дизайнеры интерьеров</h3><p>Работа в широком диапазоне стилей — от классики до современного дизайна.</p></div>
+                <div class="partner-item"><h3>Архитекторы</h3><p>Кастомизация изделий вплоть до крупномасштабных объектов.</p></div>
+                <div class="partner-item"><h3>Дизайн-бюро и студии</h3><p>Предсказуемое производство и единый уровень качества.</p></div>
+                <div class="partner-item"><h3 class="latin-weight">HoReCa</h3><p>Работа с большими объёмами для номерного фонда и общественных зон.</p></div>
+            </div>
+        </section>
+    </div>
 </div>
 
 <nav class="nav-controls">
-    <button class="arrow-btn" onclick="moveSlide(-1)">←</button>
-    <div class="counter" id="counterDisplay">01 / 03</div>
-    <button class="arrow-btn" onclick="moveSlide(1)">→</button>
+    <button class="arrow-btn" onclick="changeSlide(-1)">←</button>
+    <div class="counter" id="slideCounter">01 / 03</div>
+    <button class="arrow-btn" onclick="changeSlide(1)">→</button>
 </nav>
 
 <footer class="footer-brand">© 2026</footer>
 
 <script>
-    let currentIdx = 0;
-    const totalSlides = 3;
-    const wrapper = document.getElementById('wrapper');
-    const counterDisplay = document.getElementById('counterDisplay');
+    let currentSlide = 0;
+    const total = 3;
+    const wrapper = document.getElementById('mainWrapper');
+    const counter = document.getElementById('slideCounter');
 
-    function moveSlide(direction) {
-        currentIdx += direction;
-        if (currentIdx < 0) currentIdx = 0;
-        if (currentIdx >= totalSlides) currentIdx = totalSlides - 1;
-        
-        wrapper.style.transform = `translateX(-${currentIdx * 100}vw)`;
-        counterDisplay.innerText = `0${currentIdx + 1} / 03`;
+    function changeSlide(dir) {
+        currentSlide += dir;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= total) currentSlide = total - 1;
+
+        // Сдвиг ровно на ширину экрана
+        wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
+        counter.innerText = `0${currentSlide + 1} / 03`;
     }
 
-    // Для клавиатуры
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') moveSlide(1);
-        if (e.key === 'ArrowLeft') moveSlide(-1);
-    });
+    // Блокировка системного скролла
+    window.addEventListener('wheel', e => e.preventDefault(), {passive:false});
+    window.addEventListener('touchmove', e => e.preventDefault(), {passive:false});
 </script>
 
 </body>
